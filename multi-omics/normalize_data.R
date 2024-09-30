@@ -8,12 +8,12 @@ suppressPackageStartupMessages({
   INT <- function(x) qnorm((rank(x,na.last="keep")-0.5)/sum(!is.na(x)))
   
 })
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 
 #1. Process methylation to a file
-meth1 <- readRDS('/vol/projects/CIIM/2000HIV/AnalysisDV/Validation_MethylationDataBased/1qc6/2000HIV.Mvalue.rds')
-meth2 <- readRDS('/vol/projects/CIIM/2000HIV/AnalysisDV/Discovery_MethylationDataBased/1qc6/2000HIV.Mvalue.rds')
+meth1 <- readRDS('2000HIV/AnalysisDV/Validation_MethylationDataBased/1qc6/2000HIV.Mvalue.rds')
+meth2 <- readRDS('2000HIV/AnalysisDV/Discovery_MethylationDataBased/1qc6/2000HIV.Mvalue.rds')
 
 meth_int <- intersect(rownames(meth1),rownames(meth2))
 
@@ -39,10 +39,10 @@ fwrite(as.data.frame(meth), meth_file, row.names = T)
 
 
 #2. Read all files
-cytfile <- '/vol/projects/CIIM/meta_cQTL/data/2000HIV/Phenotype/cytokines_modified.tsv'
-metabfile <- '/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-discovery/metabolites/phenotype.tsv'
-protfile <-'/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-discovery/proteins/phenotype.tsv'
-gexfile <- '/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-discovery/expression/phenotype.tsv'
+cytfile <- 'meta_cQTL/data/2000HIV/Phenotype/cytokines_modified.tsv'
+metabfile <- 'meta_cQTL/data/2000HIV-EU-discovery/metabolites/phenotype.tsv'
+protfile <-'meta_cQTL/data/2000HIV-EU-discovery/proteins/phenotype.tsv'
+gexfile <- 'meta_cQTL/data/2000HIV-EU-discovery/expression/phenotype.tsv'
 
 plot_dist <- function(file, norm = NULL, group = F){
   tmpdf <- fread(file) %>% column_to_rownames(colnames(.)[1]) %>% t()%>% as.data.frame()

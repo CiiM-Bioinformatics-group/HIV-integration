@@ -10,8 +10,8 @@ suppressPackageStartupMessages({
   library(ggrepel)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 dir.create(paste0(outdir,'figure2'))
 append = '_corrected_scaled'
 
@@ -19,7 +19,7 @@ append = '_corrected_scaled'
 model <- readRDS(paste0(outdir,'model', append, '.rds'))
 
 #Read data
-mofaqtl <- fread('/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mofa/mapping/main_studywide.tsv')%>%
+mofaqtl <- fread('meta_cQTL/out/2000HIV-EU-discovery/mofa/mapping/main_studywide.tsv')%>%
   group_by(gene) %>%slice_min(`p-value`,n = 1)
 
 variant <- mofaqtl$SNP[which.min(mofaqtl$`p-value`)]
@@ -30,7 +30,7 @@ gene <- mofaqtl$gene[which.min(mofaqtl$`p-value`)]
 dist = 5e5
 min <- pos - dist
 max <- pos + dist
-path <- "/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mofa/mapping"
+path <- "meta_cQTL/out/2000HIV-EU-discovery/mofa/mapping"
 covar <- "main"
 
 cmd <- paste0("awk -F ':'  '$2 > ", min, " && $2 < ", max, "' ", path, "/", covar, "/", chr, ".tsv", " | grep ", gene)
@@ -41,7 +41,7 @@ whole_locus <- fread(cmd = cmd, col.names = c("SNPid", "gene", "beta", "t", "P")
 #Finemapping
 #Extracting the dosage and correlation
 dosage <- fread(cmd = paste0('grep "',whole_locus$SNPid[1],'" -A ',nrow(whole_locus)-1,
-                       ' /vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/genotype/dosage/',chr,'.txt'))
+                       ' meta_cQTL/out/2000HIV-EU-discovery/genotype/dosage/',chr,'.txt'))
 dosage <- as.data.frame(dosage)%>%column_to_rownames("V1")
 R <- cor(t(dosage))
 Z <- qnorm(whole_locus$P/2, lower.tail = F)*sign(whole_locus$beta)

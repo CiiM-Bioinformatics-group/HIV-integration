@@ -17,8 +17,8 @@ suppressPackageStartupMessages({
 })
 
 #Inflammation score
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 dir.create(paste0(outdir,'figure1'))
 append = '_corrected_scaled'
 
@@ -26,7 +26,7 @@ append = '_corrected_scaled'
 model <- readRDS(paste0(outdir,'model', append, '.rds'))
 
 #Colors: From jbgb13/peRReo
-source('/vol/projects/CIIM/2000HIV/cQTL/mofa/code/peRReo.R')
+source('2000HIV/cQTL/mofa/code/peRReo.R')
 viewcol <- latin_palette('buenavista', n=5)
 names(viewcol) <- views_names(model)
 
@@ -127,7 +127,7 @@ cyt_cv <- cyt_all %>% group_by(feature) %>% summarise('CV' = CV(value)) %>% pull
 
 
 # #How is the eaa?
-#eaa <- fread('/vol/projects/CIIM/2000HIV/AnalysisDV/Discovery_MethylationDataBased/3Aging/Discovery.DNAmAge.output.csv')%>%
+#eaa <- fread('2000HIV/AnalysisDV/Discovery_MethylationDataBased/3Aging/Discovery.DNAmAge.output.csv')%>%
 #   dplyr::select(c("SampleID","EEAA","IEAA.Hannum","AgeAccelerationResidualHannum","AgeAccelGrim","AgeAccelPheno"))%>%
 #   dplyr::rename(sample=SampleID)
 
@@ -366,7 +366,7 @@ ggsave(plot = barplot_filled_legend,paste0(outdir,'figure1/variance_cov_clin_cor
 #       width = 4, height = 1)
 
 #The genetic component
-mofaqtl <- fread('/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mofa/mapping/main_1e-5.tsv')%>%
+mofaqtl <- fread('meta_cQTL/out/2000HIV-EU-discovery/mofa/mapping/main_1e-5.tsv')%>%
   group_by(gene) %>%slice_min(`p-value`,n = 1)
 
 barplot_mofaqtl <- mofaqtl %>%
@@ -502,7 +502,7 @@ ggplot(all_ifn, aes(x=prot_score,y=gex_score))+geom_point()+stat_cor()+geom_smoo
 #ggsave(paste0(outdir,'figure1/inosi_score_gex_to_prot',append,'.pdf'), width = 2.5, height = 2.5)
 
 #Check EAA
-#inosi_metab <- fread('/vol/projects/CIIM/2000HIV/Metabolites/2000HIV_GeneralMetabolomics_raw_metabolome_data_outliers_and_pSS_excluded_1902samples_touse.csv')%>%
+#inosi_metab <- fread('2000HIV/Metabolites/2000HIV_GeneralMetabolomics_raw_metabolome_data_outliers_and_pSS_excluded_1902samples_touse.csv')%>%
 #  .[,c('Row.names','806.4946')]
 #colnames(inosi_metab) <- c('sample','phosphatidylinositol')
 
@@ -563,7 +563,7 @@ ggplot(factor8_test,aes(y=reorder(clin_var,-p)))+
 ggsave(paste0(outdir,'figure1/Factor8_clinical',append,'.pdf'), width = 3, height = 5)
 
 #Add IMT
-#IMT <- fread(cmd = paste0("cat /vol/projects/CIIM/2000HIV/Phenotype/",
+#IMT <- fread(cmd = paste0("cat 2000HIV/Phenotype/",
 #                          "221110_2000hiv_study_export_processed_2.0_SIMPLIFIED.csv | cut -f 1,258 -d ';'"))%>%
 #  dplyr::rename('sample' = ID) %>% inner_join(
 #    get_factors(model,as.data.frame=T), by = 'sample')

@@ -12,8 +12,8 @@ suppressPackageStartupMessages({
   library(rstatix)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 
 append = '_corrected_scaled'
 dir.create(paste0(outdir,'profiles'))
@@ -21,7 +21,7 @@ dir.create(paste0(outdir,'profiles'))
 model <- readRDS(paste0(outdir,'model', append, '.rds'))
 
 #Colors
-source('/vol/projects/CIIM/2000HIV/cQTL/mofa/code/peRReo.R')
+source('2000HIV/cQTL/mofa/code/peRReo.R')
 viewcol <- latin_palette('buenavista', n=5)
 names(viewcol) <- views_names(model)
 
@@ -267,7 +267,7 @@ factor_profile <- function(mofa, factor, save = T, df, covar){
 
   #Metabolite enrichment (overrepresentation)
   sigmetab <- sigweights %>% filter(view == 'metab') %>% pull(feature)
-  metab_ids  <- fread('/vol/projects/CIIM/2000HIV/Metabolites/metabo_index.tsv') %>%
+  metab_ids  <- fread('2000HIV/Metabolites/metabo_index.tsv') %>%
     filter(name %in% sigmetab)
   #Jianbo's approach
   sigmetab_ids <- metab_ids$HMDB_ids %>% str_split(',', simplify = T) %>% .[,1]
@@ -396,7 +396,7 @@ full_factor_profile(model, model_df,'RP_YESNO',20)
 
 
 #Adding EEAA
-eaa <- fread('/vol/projects/CIIM/2000HIV/AnalysisDV/Discovery_MethylationDataBased/3Aging/Discovery.DNAmAge.output.csv')%>%
+eaa <- fread('2000HIV/AnalysisDV/Discovery_MethylationDataBased/3Aging/Discovery.DNAmAge.output.csv')%>%
   dplyr::select(c("SampleID","EEAA"))%>%
   dplyr::rename(sample=SampleID)
 

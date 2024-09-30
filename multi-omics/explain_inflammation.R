@@ -13,8 +13,8 @@ suppressPackageStartupMessages({
   library(lavaan)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 dir.create(paste0(outdir,'figure2'))
 append = '_corrected_scaled'
 
@@ -22,7 +22,7 @@ append = '_corrected_scaled'
 model <- readRDS(paste0(outdir,'model', append, '.rds'))
 
 #Colors: From jbgb13/peRReo
-source('/vol/projects/CIIM/2000HIV/cQTL/mofa/code/peRReo.R')
+source('2000HIV/cQTL/mofa/code/peRReo.R')
 viewcol <- latin_palette('buenavista', n=5)
 names(viewcol) <- views_names(model)
 
@@ -94,7 +94,7 @@ fwrite(models, paste0(outdir,'figure2/explained_variance_all.csv'))
 
 #genetics
 #all_gen <- fread(cmd = 'grep -i il1b 
-#                  /vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/*/mapping/main_genomewide_loci.tsv', fill=TRUE)
+#                  meta_cQTL/out/2000HIV-EU-discovery/*/mapping/main_genomewide_loci.tsv', fill=TRUE)
 
 
 pred_colors <- c('AGE' = 'black', 'SEX_BIRTH' = 'black', 'BMI_BASELINE' = 'black',

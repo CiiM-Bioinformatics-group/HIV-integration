@@ -3,7 +3,7 @@ suppressPackageStartupMessages({
   library(tidyverse)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
 
 table <- fread(covs)  %>% filter(ETHNICITY.White == 1)
 table_grouped <- table %>% 

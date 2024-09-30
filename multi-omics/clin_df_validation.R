@@ -5,16 +5,16 @@ suppressPackageStartupMessages({
   library(MOFA2)
 })
 
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+outdir = "2000HIV/cQTL/mofa/out/"
 append = "_corrected_scaled"
 alpha <- 0.01
 append <- paste0('_alpha',alpha,append)
 factors <- fread(paste0(outdir, 'validation/validation_factors',append,'.csv'))%>%column_to_rownames('V1')
 
 #Clinical data
-clin <- '/vol/projects/CIIM/2000HIV/Phenotype/220317_2000hiv_study_export_processed.csv'
-clin2 <- '/vol/projects/CIIM/2000HIV/Phenotype/231912_CVD_phenotypes.csv'
-info <- '/vol/projects/CIIM/2000HIV/Phenotype/220221_ECRF_GUIDE_2000HIV.docx'
+clin <- '2000HIV/Phenotype/220317_2000hiv_study_export_processed.csv'
+clin2 <- '2000HIV/Phenotype/231912_CVD_phenotypes.csv'
+info <- '2000HIV/Phenotype/220221_ECRF_GUIDE_2000HIV.docx'
 
 clin_df <- fread(clin) %>% as.data.frame() %>%
   inner_join(fread(clin2) %>%

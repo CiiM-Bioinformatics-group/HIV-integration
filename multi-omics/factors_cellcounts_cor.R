@@ -9,8 +9,8 @@ suppressPackageStartupMessages({
   library(xlsx)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 dir.create(paste0(outdir,'cc_cor'))
 #mclapply(c('corrected','uncorrected'), function(i){
 #  mclapply(c('scaled','unscaled'), function(j){
@@ -26,7 +26,7 @@ dir.create(paste0(outdir,'cc_cor'))
     #Factors
     factors <- get_factors(model, factors = "all") %>% .$single_group
 
-cc <- readxl::read_excel('/vol/projects/CIIM/2000HIV/2000HIV_Flowcytometry/UpdatedFlowcytometry/2000HIV_FLOW_ABS_panel123merged_QCed_untransformed(raw)data_1423samples_356vars_Nov062023.xlsx',
+cc <- readxl::read_excel('2000HIV/2000HIV_Flowcytometry/UpdatedFlowcytometry/2000HIV_FLOW_ABS_panel123merged_QCed_untransformed(raw)data_1423samples_356vars_Nov062023.xlsx',
                           1)
 
 factors_cc <- inner_join(as.data.frame(factors) %>% rownames_to_column('samples'),

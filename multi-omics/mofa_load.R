@@ -13,8 +13,8 @@ suppressPackageStartupMessages({
   library(minfi)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 dir.create(paste0(outdir,'umaps'))
 dir.create(paste0(outdir,'overview'))
 
@@ -73,7 +73,7 @@ for(i in c('corrected','uncorrected')){
         str_split(pattern = '\\.', simplify = T) %>% .[,1] ]
 
     #Metabolite names
-    metab_ids  <- fread('/vol/projects/CIIM/2000HIV/Metabolites/ionMz2ID.tsv')%>%
+    metab_ids  <- fread('2000HIV/Metabolites/ionMz2ID.tsv')%>%
                   pull(name, name=formula)
     features_names(model)$metab <- metab_ids[features_names(model)$metab]
 

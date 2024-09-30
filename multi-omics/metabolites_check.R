@@ -8,14 +8,14 @@ suppressPackageStartupMessages({
 #DECISION: Leave PC1 in the metabolites as it seems the cause is not clear and MOFA does find it and therefore does not
 #affect our analyses
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 
 append = '_corrected_scaled'
 
 model <- readRDS(paste0(outdir,'model', append, '.rds'))
 
-metab_unscaled <- fread('/vol/projects/CIIM/2000HIV/Metabolites/2000HIV_GeneralMetabolomics_raw_metabolome_data_outliers_and_pSS_excluded_1902samples_touse.csv')%>%
+metab_unscaled <- fread('2000HIV/Metabolites/2000HIV_GeneralMetabolomics_raw_metabolome_data_outliers_and_pSS_excluded_1902samples_touse.csv')%>%
   column_to_rownames(colnames(.)[1]) %>% .[-c(1,2,3)]
 
 metabs <- get_data(model, views = 'metab')[[1]][[1]]
@@ -42,7 +42,7 @@ metab_loads <- prcomp(t(metabs))
 metabs_pc_top <- abs(metab_loads[["rotation"]][,'PC1']) %>% sort(decreasing = T) %>%
   .[1:20] %>%
   names()
-metab_ids  <- fread('/vol/projects/CIIM/2000HIV/Metabolites/ionMz2ID.tsv') %>%
+metab_ids  <- fread('2000HIV/Metabolites/ionMz2ID.tsv') %>%
   mutate(ionMz = gsub('X','',ionMz))%>% pull(ionMz, name=name)
 metabs_pc_top_name <- unname(metab_ids[metabs_pc_top])
 

@@ -14,8 +14,8 @@ suppressPackageStartupMessages({
   library(rstatix)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 
 append = '_corrected_scaled'
 
@@ -94,7 +94,7 @@ f6_nlrp12 %>% filter(grepl('IL1B',feature))%>%
 
 #Get all QTLs for the top snp
 allqtls <- fread(cmd =
-                   'grep rs3974831 /vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/*/mapping/main_genomewide.tsv',
+                   'grep rs3974831 meta_cQTL/out/2000HIV-EU-discovery/*/mapping/main_genomewide.tsv',
                  col.names = c('file','feature','beta','t','p'))%>%
-  mutate(file = gsub('/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/','',file))%>%
+  mutate(file = gsub('meta_cQTL/out/2000HIV-EU-discovery/','',file))%>%
   separate(file, into = 'view', sep = '/')

@@ -7,11 +7,11 @@ suppressPackageStartupMessages({
   library(rstatix)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
 append = "_corrected_scaled"
 alpha <- 0.01
 append <- paste0('_validation_alpha',alpha,append)
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+outdir = "2000HIV/cQTL/mofa/out/"
 #Read the clean table created by clin_df.R
 clin_df_full <- fread(paste0(outdir,'validation/clin_df',append,'.csv'))%>%dplyr::rename('Record.Id' = colnames(.)[1])%>%
   left_join(fread(covs))%>%

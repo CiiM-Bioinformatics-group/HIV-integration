@@ -5,8 +5,8 @@ suppressPackageStartupMessages({
   library(MOFA2)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 
 wgsf <- '/vol/projects/zzhang/projects/wp_2000hiv/inputs/phenotypes/230221_2000hiv_study_export_processed_EC.donor_with_wgs.csv'
 wgs <- fread(wgsf)%>%dplyr::rename('sample' = ID)

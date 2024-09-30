@@ -6,8 +6,8 @@ suppressPackageStartupMessages({
   library(ggpubr)
 })
 
-covs <- "/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv"
-outdir <- "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs <- "2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv"
+outdir <- "2000HIV/cQTL/mofa/out/"
 append <- "_corrected_scaled"
 dir.create(paste0(outdir, "validation"))
 
@@ -100,19 +100,19 @@ factor_list <- parallel::mclapply(c("discovery","validation"), function(cohort){
     dplyr::rename("sample" = Record.Id)
 
   #Read files
-  cyt <- read_tsv("/vol/projects/CIIM/meta_cQTL/data/2000HIV/Phenotype/cytokines_modified.tsv",
+  cyt <- read_tsv("meta_cQTL/data/2000HIV/Phenotype/cytokines_modified.tsv",
                   "cyt", correct = correct, norm = log1p, samples = cohort, covdf = covdf1)
   #RPMIs out
   cyt <- cyt[,!grepl("rpmi",colnames(cyt))]%>% t()
   #cyt %>% group_by(feature) %>% summarise(x=sum(!is.na(value))) %>% view()
 
-  metab <- read_tsv(paste0("/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-",cohort,"/metabolites/phenotype.tsv"),
+  metab <- read_tsv(paste0("meta_cQTL/data/2000HIV-EU-",cohort,"/metabolites/phenotype.tsv"),
                     "metab", correct = correct, norm = log1p, samples = cohort, covdf = covdf1)%>%
     t()
-  prot <- read_tsv(paste0("/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-",cohort,"/proteins/phenotype.tsv"),
+  prot <- read_tsv(paste0("meta_cQTL/data/2000HIV-EU-",cohort,"/proteins/phenotype.tsv"),
                    "prot", correct = correct, samples = cohort, covdf = covdf1)%>%
     t()
-  gex <- read_tsv(paste0("/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-",cohort,"/expression/phenotype.tsv"),
+  gex <- read_tsv(paste0("meta_cQTL/data/2000HIV-EU-",cohort,"/expression/phenotype.tsv"),
                  "gex", correct = correct, norm = log1p, samples = cohort, covdf = covdf1)%>%
     t()
 

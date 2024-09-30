@@ -6,7 +6,7 @@ suppressPackageStartupMessages({
   library(parallel)
 })
 
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+outdir = "2000HIV/cQTL/mofa/out/"
 dir.create(paste0(outdir,'clin_cor'))
 
 #mclapply(c('corrected','uncorrected'), function(i){
@@ -18,9 +18,9 @@ append = '_corrected_scaled'
     factors <- do.call("rbind",get_factors(model))
 
     #Clinical data
-    clin <- '/vol/projects/CIIM/2000HIV/Phenotype/220317_2000hiv_study_export_processed.csv'
-    clin2 <- '/vol/projects/CIIM/2000HIV/Phenotype/231912_CVD_phenotypes.csv'
-    info <- '/vol/projects/CIIM/2000HIV/Phenotype/220221_ECRF_GUIDE_2000HIV.docx'
+    clin <- '2000HIV/Phenotype/220317_2000hiv_study_export_processed.csv'
+    clin2 <- '2000HIV/Phenotype/231912_CVD_phenotypes.csv'
+    info <- '2000HIV/Phenotype/220221_ECRF_GUIDE_2000HIV.docx'
 
     clin_df <- fread(clin)%>%as.data.frame()%>%inner_join(fread(clin2)%>%dplyr::rename('Record Id' = `Record.Id`)%>%
                                                             .[,-c(2:6,8,9)], by = 'Record Id')%>%

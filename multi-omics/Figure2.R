@@ -17,8 +17,8 @@ suppressPackageStartupMessages({
   library(lavaan)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 dir.create(paste0(outdir,'figure2'))
 append = '_corrected_scaled'
 
@@ -26,12 +26,12 @@ append = '_corrected_scaled'
 model <- readRDS(paste0(outdir,'model', append, '.rds'))
 
 #Colors: From jbgb13/peRReo
-source('/vol/projects/CIIM/2000HIV/cQTL/mofa/code/peRReo.R')
+source('2000HIV/cQTL/mofa/code/peRReo.R')
 viewcol <- latin_palette('buenavista', n=5)
 names(viewcol) <- views_names(model)
 
 #The genetic component
-mofaqtl <- fread('/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mofa/mapping/main_1e-5.tsv')%>%
+mofaqtl <- fread('meta_cQTL/out/2000HIV-EU-discovery/mofa/mapping/main_1e-5.tsv')%>%
   group_by(gene) %>%slice_min(`p-value`,n = 1)
 
 pthresh <- -log10(5e-8/length(unique(mofaqtl$gene)))
@@ -70,8 +70,8 @@ topsnp <- 'chr19:53824059:C:A;rs34436714'
 topchr <- str_split(topsnp, pattern = ':', simplify=T)[,1]
 
 xqtls <- fread(cmd=paste0('grep -w "',topsnp,
-                      '" /vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/*/mapping/main_genomewide.tsv'))%>%
-  mutate(V1 = gsub('/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/','', V1)%>%
+                      '" meta_cQTL/out/2000HIV-EU-discovery/*/mapping/main_genomewide.tsv'))%>%
+  mutate(V1 = gsub('meta_cQTL/out/2000HIV-EU-discovery/','', V1)%>%
            gsub(paste0('/mapping/main_genomewide.tsv:',topsnp), '', .))%>%
   filter(V1 %in% c('proteins','metabolites','cell_count','expression'))%>%
   mutate(V1=gsub('_many','',V1))%>%
@@ -87,14 +87,14 @@ xqtl_rep <- lapply(names(matches_list), function(v){
   g <- matches_list[[v]]
 
   emptydf <- data.frame('view' = v, 'gene' = g, 'beta' = NA, 'tstat' = NA, 'pval' = NA)
-  file <- paste0('/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-validation/',v,'/mapping/main/',topchr,'.tsv')
+  file <- paste0('meta_cQTL/out/2000HIV-EU-validation/',v,'/mapping/main/',topchr,'.tsv')
 
   if(!file.exists(file)) {
     print('File does not exist')
     return(emptydf)
     }
   command <- paste0('grep ',paste(paste0('-e "',topsnp, '.', g,'"'), collapse = ' '),
-                    ' /vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-validation/',v,'/mapping/main/',topchr,'.tsv')
+                    ' meta_cQTL/out/2000HIV-EU-validation/',v,'/mapping/main/',topchr,'.tsv')
   df <- fread(cmd=command,
               col.names = c('V1',colnames(xqtls)[2:5]))
   if(is.null(df)) df <- emptydf else df <- dplyr::select(df,-V1)%>%mutate(view=v)
@@ -263,7 +263,7 @@ ggsave(paste0(outdir,'figure2/inflammasome_score_reactome_to_allfactors',append,
 #Check if the qtl snp has an effect on both
 topsnp2 <- gsub('chr','',topsnp) %>% str_split(pattern = ';', simplify=T)%>%.[,1]
 snp_dos <- fread(cmd = paste0('zgrep -w -e CHROM -e "', topsnp2,
-                               '" /vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-discovery/Genotype/vcf/',topchr,'.vcf.gz'))%>%
+                               '" meta_cQTL/data/2000HIV-EU-discovery/Genotype/vcf/',topchr,'.vcf.gz'))%>%
   as.data.frame()
 snp_dos <- snp_dos[,10:ncol(snp_dos)]
 colnames(snp_dos) <- str_split(colnames(snp_dos), pattern = '_', simplify = T)[,2]
@@ -327,7 +327,7 @@ ggplot(inflam_scores_factor_snp %>%
 ggsave(paste0(outdir,'figure2/allfactors_to_snp_dosage',append,'.pdf'), width = 12, height = 12)
 
 #Correlate both to the metabolites we have found
-metab_ids  <- fread('/vol/projects/CIIM/2000HIV/Metabolites/ionMz2ID.tsv')%>%
+metab_ids  <- fread('2000HIV/Metabolites/ionMz2ID.tsv')%>%
   filter(formula %in% (xqtls %>% filter(view == 'metabolites' & pval<5e-8) %>% pull(gene)))
 
 inflam_metabs <- get_data(model, views = 'metab', as.data.frame=T)%>%
@@ -361,12 +361,12 @@ filter(path == 'REACTOME_THE_NLRP3_INFLAMMASOME')%>%
 ggsave(paste0(outdir,'figure2/inflammasome_score_reactome_to_metabolites_nlrp12',append,'.pdf'), width = 4, height = 4)
 
 #Correlate the factor to cell counts
-cellcounts <- fread('/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-discovery/cell_count/phenotype.tsv')%>%
+cellcounts <- fread('meta_cQTL/data/2000HIV-EU-discovery/cell_count/phenotype.tsv')%>%
   column_to_rownames('V1') %>% .[filter(xqtls, view == 'cell_count') %>% pull(gene),]%>%
   t()%>%as.data.frame()%>%rownames_to_column('sample')%>%melt(value.name = 'cc')
 
 #Are percentages relative to all mono? Should be cause all are almost 100
-fread('/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-discovery/cell_count/phenotype.tsv')%>%
+fread('meta_cQTL/data/2000HIV-EU-discovery/cell_count/phenotype.tsv')%>%
   column_to_rownames('V1') %>% .[filter(xqtls, view == 'cell_count') %>% pull(gene),]%>%t()%>%rowSums()
 
 cellcounts_factors <- inner_join(cellcounts,

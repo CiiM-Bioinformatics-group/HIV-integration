@@ -14,8 +14,8 @@ suppressPackageStartupMessages({
 })
 
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 
 append = '_corrected_scaled'
 
@@ -27,7 +27,7 @@ eur_samples <- samples_names(model)[[1]][model@samples_metadata$ETHNICITY.White 
 model <- subset_samples(model, eur_samples)
 
 #Colors: From jbgb13/peRReo
-source('/vol/projects/CIIM/2000HIV/cQTL/mofa/code/peRReo.R')
+source('2000HIV/cQTL/mofa/code/peRReo.R')
 viewcol <- latin_palette('buenavista', n=5)
 names(viewcol) <- views_names(model)
 

@@ -7,8 +7,8 @@ library(RColorBrewer)
 library(ggpubr)
 
 
-dataroot <- "/vol/projects/CIIM/meta_cQTL/data"
-root <- "/vol/projects/CIIM/meta_cQTL/out"
+dataroot <- "meta_cQTL/data"
+root <- "meta_cQTL/out"
 cohort <- "2000HIV-EU-discovery"
 cov <- "main"
 pheno <- "protein"
@@ -30,7 +30,7 @@ if (loci) {
 }
 nrow(qtl) #
 
-qtl_other <- fread("/vol/projects/CIIM/resources/GTEx/v8_eQTL/Whole_Blood.v8.signif_variant_gene_pairs.txt.gz")
+qtl_other <- fread("resources/GTEx/v8_eQTL/Whole_Blood.v8.signif_variant_gene_pairs.txt.gz")
 
 
 
@@ -44,10 +44,10 @@ suppressPackageStartupMessages({
   library(ggpubr)
 })
 
-outdir <- '/vol/projects/CIIM/2000HIV/cQTL/mofa/out/pqtl_ukb/'
+outdir <- '2000HIV/cQTL/mofa/out/pqtl_ukb/'
 dir.create(outdir)
 
-pqtl <- fread('/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/proteins/extra/main_genomewide_loci_ukb.tsv')%>%
+pqtl <- fread('meta_cQTL/out/2000HIV-EU-discovery/proteins/extra/main_genomewide_loci_ukb.tsv')%>%
   separate(ID, into = c('chr_hg19','pos_hg19','REF_ukb','ALT_ukb'), sep = ':', remove = F)%>%
   mutate('beta_ukb_aligned' = ifelse(REF == REF_ukb & ALT == ALT_ukb, beta_ukb,
                                      ifelse(REF == ALT_ukb & ALT == REF_ukb, -beta_ukb,NA)),

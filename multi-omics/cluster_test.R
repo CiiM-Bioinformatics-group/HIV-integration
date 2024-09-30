@@ -4,7 +4,7 @@ suppressPackageStartupMessages({
   library(MOFA2)
 })
 
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+outdir = "2000HIV/cQTL/mofa/out/"
 args = commandArgs(trailingOnly=TRUE)
 corrected = args[1]
 model <- readRDS(model, paste0(outdir,'model', corrected, '.rds'))

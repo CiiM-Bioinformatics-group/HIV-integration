@@ -8,8 +8,8 @@ suppressPackageStartupMessages({
   library(parallel)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/clin_cor/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/clin_cor/"
 #mclapply(c('corrected','uncorrected'), function(i){
 #  mclapply(c('scaled','unscaled'), function(j){
 #    append = paste0('_',i,'_',j)

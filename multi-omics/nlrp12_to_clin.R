@@ -6,8 +6,8 @@ suppressPackageStartupMessages({
   library(parallel)
 })
 
-covs = '/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-discovery/covariates.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = 'meta_cQTL/data/2000HIV-EU-discovery/covariates.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 dir.create(paste0(outdir,'clin_cor'))
 
 clin_df_clean <- fread(paste0(outdir,'clin_cor/clin_df_corrected_scaled.csv'))%>%
@@ -16,7 +16,7 @@ clin_df_clean <- fread(paste0(outdir,'clin_cor/clin_df_corrected_scaled.csv'))%>
 colnames(clin_df_clean) <- gsub('%','_', colnames(clin_df_clean))
 
 nlrp12 <- fread(cmd = paste0('grep -e SNP -e "chr19:53824059:C:A;rs34436714"',
-                ' /vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/genotype/dosage/chr19.txt'))%>%
+                ' meta_cQTL/out/2000HIV-EU-discovery/genotype/dosage/chr19.txt'))%>%
   column_to_rownames('SNP')%>%t()%>%as.data.frame()%>%dplyr::rename('SNP' = `chr19:53824059:C:A;rs34436714`)%>%
   rownames_to_column('sample')
 

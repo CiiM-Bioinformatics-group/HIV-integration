@@ -5,8 +5,8 @@ suppressPackageStartupMessages({
   library(MOFA2)
 })
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 dir.create(paste0(outdir,'figure2'))
 append = '_corrected_scaled'
 
@@ -14,15 +14,15 @@ append = '_corrected_scaled'
 model <- readRDS(paste0(outdir,'model', append, '.rds'))
 
 #Read data
-mofaqtl <- fread('/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mofa/mapping/main_studywide.tsv')%>%
+mofaqtl <- fread('meta_cQTL/out/2000HIV-EU-discovery/mofa/mapping/main_studywide.tsv')%>%
   group_by(gene) %>%slice_min(`p-value`,n = 1)
 
 topsnp <- 'chr19:53824059:C:A;rs34436714'
 topchr <- str_split(topsnp, pattern = ':', simplify=T)[,1]
 
 xqtls <- fread(cmd=paste0('grep -w "',topsnp,
-                          '" /vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/*/mapping/main/',topchr,'.tsv'))%>%
-  mutate(V1 = gsub('/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/','', V1)%>%
+                          '" meta_cQTL/out/2000HIV-EU-discovery/*/mapping/main/',topchr,'.tsv'))%>%
+  mutate(V1 = gsub('meta_cQTL/out/2000HIV-EU-discovery/','', V1)%>%
            gsub(paste0('/mapping/main/',topchr,'.tsv:',topsnp), '', .))
 
 xqtls <- xqtls %>%

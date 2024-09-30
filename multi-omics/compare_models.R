@@ -10,7 +10,7 @@ suppressPackageStartupMessages({
   library(clusterProfiler)
 })
 
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+outdir = "2000HIV/cQTL/mofa/out/"
 
 model_corrected_scaled <- readRDS(paste0(outdir,"model_corrected_scaled.rds"))
 model_uncorrected_scaled <- readRDS(paste0(outdir,"model_uncorrected_scaled.rds"))

@@ -12,8 +12,8 @@ suppressPackageStartupMessages({
 reticulate::use_condaenv('mofa')
 reticulate::use_python('~/miniconda3/envs/mofa/bin/python')
 
-covs = '/vol/projects/CIIM/2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
-outdir = "/vol/projects/CIIM/2000HIV/cQTL/mofa/out/"
+covs = '2000HIV/Phenotype/Phenotype_2000HIV_all_01.tsv'
+outdir = "2000HIV/cQTL/mofa/out/"
 dir.create(outdir, showWarnings = F)
 dir.create(paste0(outdir,'data'), showWarnings = F)
 
@@ -57,17 +57,17 @@ mclapply(c(T,F), function(correct){
     dplyr::rename('sample' = Record.Id)
 
   #Read files
-  cyt <- read_tsv('/vol/projects/CIIM/meta_cQTL/data/2000HIV/Phenotype/cytokines_modified.tsv',
+  cyt <- read_tsv('meta_cQTL/data/2000HIV/Phenotype/cytokines_modified.tsv',
                   'cyt', correct = correct, norm = log1p)
   #RPMIs out
   cyt <- cyt %>% subset(!grepl('rpmi',feature))
   #cyt %>% group_by(feature) %>% summarise(x=sum(!is.na(value))) %>% view()
 
-  metab <- read_tsv('/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-discovery/metabolites/phenotype.tsv',
+  metab <- read_tsv('meta_cQTL/data/2000HIV-EU-discovery/metabolites/phenotype.tsv',
                     'metab', correct = correct, norm = log1p)
-  prot <- read_tsv('/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-discovery/proteins/phenotype.tsv',
+  prot <- read_tsv('meta_cQTL/data/2000HIV-EU-discovery/proteins/phenotype.tsv',
                    'prot', correct = correct)
-  gex <- read_tsv('/vol/projects/CIIM/meta_cQTL/data/2000HIV-EU-discovery/expression/phenotype.tsv',
+  gex <- read_tsv('meta_cQTL/data/2000HIV-EU-discovery/expression/phenotype.tsv',
                   'gex', correct = correct, norm = log1p)
 
   meth_file <- paste0(outdir, 'meth.csv')
