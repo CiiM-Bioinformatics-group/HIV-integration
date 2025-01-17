@@ -9,31 +9,6 @@ suppressPackageStartupMessages({
   library(parallel)
 })
 
-base <- "/vol/projects/CIIM/meta_cQTL"
-cohort <- "2000HIV-EU-discovery"
-cohort_out <- "2000HIV-EU-discovery_old"
-pheno_type <- "cytokines"
-cov_interact <- "main"
-p_val <- 1
-cov_main_unsplit <- "age,sex,bmi,lockdown,hiv_duration,season_sin,season_cos"
-
-
-# proteins or metabolites
-pheno_type <- "proteins"
-out_mapping <- paste(base, "out", cohort_out, pheno_type, "mapping", cov_interact, "chr22", sep = "/")
-
-# cytokines
-pheno_type <- "cytokines"
-out_mapping <- paste(base, "out", cohort_out, pheno_type, "mapping-chr", cov_interact, "chr22", sep = "/")
-
-
-# other paths
-snp_path <- paste(base, "out", cohort, "genotype/dosage/chr3.txt", sep = "/")
-cov_path <- paste(base, "data", cohort, pheno_type, "covariates.tsv", sep = "/")
-pheno_path <- paste(base, "out", cohort, pheno_type, "phenotype/normalised.tsv", sep = "/")
-
-
-# Overrides the manual paths above which are just used for testing
 args <- commandArgs(trailingOnly = TRUE)
 snp_path <- args[1]
 cov_path <- args[2]

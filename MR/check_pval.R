@@ -3,14 +3,6 @@
 library(tidyverse)
 library(data.table)
 
-outdir <- "/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mr/main"
-pheno1 <- "expression"    # exposure
-pheno2 <- "cytokines"   # outcome
-
-output <- paste0(outdir, "/", pheno1, "_on_", pheno2, "/all_mr_checked_pval.tsv")
-input <- paste0(outdir, "/", pheno1, "_on_", pheno2, "/all_mr_checked.tsv")
-pval_file <- paste0(outdir, "/", pheno1, "_on_", pheno2, "/pvalue.txt")
-
 args <- commandArgs(trailingOnly = TRUE)
 output <- args[1]
 input <- args[2]

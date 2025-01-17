@@ -6,13 +6,6 @@ suppressPackageStartupMessages({
     library(ggplot2)
 })
 
-base <- "/vol/projects/CIIM/meta_cQTL"
-cohort <- "HINT"
-pheno_type <- "cytokines"
-infile <- paste(base, "out", cohort, pheno_type, "phenotype/filtered.tsv", sep = "/")
-outfile <- paste(base, "out", cohort, pheno_type, "phenotype/normalised.tsv", sep = "/")
-
-# Overrides the manual paths above which are just used for testing
 args <- commandArgs(trailingOnly = TRUE)
 infile <- args[1]
 outfile <- args[2]

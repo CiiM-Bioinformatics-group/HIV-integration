@@ -3,14 +3,6 @@
 library(tidyverse)
 library(data.table)
 
-root <- "/vol/projects/CIIM/meta_cQTL/out"
-cohort <- "2000HIV-EU-discovery"
-cov <- "main"
-pheno_e <- "proteins"    # exposure
-pheno_o <- "cytokines"   # outcome
-input <- paste0(root, "/", cohort, "/mr/", cov, "/", pheno_e, "_on_", pheno_o, "/all_mr_checked.tsv")
-outdir <- paste0(root, "/", cohort, "/mr/", cov, "/", pheno_e, "_on_", pheno_o, "/per_outcome")
-
 args <- commandArgs(trailingOnly = TRUE)
 input <- args[1]
 outdir <- args[2]

@@ -4,14 +4,6 @@ library(tidyverse)
 library(data.table)
 library(ggplot2)
 
-outdir <- "/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mr/main"
-pheno1 <- "proteins"    # exposure
-pheno2 <- "cytokines"   # outcome
-
-output <- paste0(outdir, "/", pheno1, "_on_", pheno2, "/all_mr_checked.tsv")
-input1 <- paste0(outdir, "/", pheno1, "_on_", pheno2, "/all_mr.tsv")
-input2 <- paste0(outdir, "/", pheno2, "_on_", pheno1, "/all_mr.tsv")
-
 args <- commandArgs(trailingOnly = TRUE)
 output <- args[1]
 input1 <- args[2]

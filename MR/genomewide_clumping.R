@@ -14,16 +14,6 @@ library(plinkbinr)
 
 options(future.globals.maxSize = 8000 * 1024^2)
 
-root <- "/vol/projects/CIIM/meta_cQTL/out"
-cohort <- "2000HIV-EU-discovery"
-cov <- "main"
-pheno <- "expression"  
-bfile <- paste0(root, "/", cohort, "/genotype/allchr")
-pval <- "1e-5" 
-outpath <- paste0(root, "/", cohort, "/mr/", cov, "/clump/", pheno)
-val_cohort <- "2000HIV-EU-validation"
-val_pval_threshold <- 0.05
-
 args <- commandArgs(trailingOnly = TRUE)
 root <- args[1]
 cohort <- args[2]

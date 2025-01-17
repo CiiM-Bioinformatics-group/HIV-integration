@@ -14,32 +14,6 @@ library(plinkbinr)
 
 options(future.globals.maxSize = 8000 * 1024^2)
 
-root <- "/vol/projects/CIIM/meta_cQTL/out"
-cohort <- "2000HIV-EU-discovery"
-cov <- "main"
-#n_samples <- 267       # validation 2000HIV-EU
-n_samples <- 1064       # discovery 2000HIV-EU
-pheno1 <- "proteins"    # exposure
-pheno2 <- "cytokines"   # outcome
-bfile <- paste0(root, "/", cohort, "/genotype/allchr")
-e <- "IL17D_Inflammation"
-file1 <- paste0(root, "/", cohort, "/mr/", cov, "/clump/", pheno1, "/", e, ".tsv")
-file2 <- paste0(root, "/", cohort, "/mr/", cov, "/", pheno1, "_on_", pheno2, "/data/", e, "_snps.tsv")
-
-testing <- FALSE
-
-pval <- "1e-5" # string, otherwise it becomes 1e-05
-pval_val <- 0.05
-outpath <- paste0(root, "/", cohort, "/mr/", cov, "/", pheno1, "_on_", pheno2, "/", e)
-
-
-file1 = "/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mr/main/clump/proteins/RAB10_Cardiometabolic_II.tsv"
-file2 = "/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mr/main/proteins_on_cytokines/data/RAB10_Cardiometabolic_II_snps.tsv"
-pheno1 = "proteins"
-pheno2 = "cytokines"
-pval_val = "0.05"
-outpath = "/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery_old/mr/main/proteins_on_cytokines/RAB10_Cardiometabolic_II"
-
 args <- commandArgs(trailingOnly = TRUE)
 file1 <- args[1]
 file2 <- args[2]

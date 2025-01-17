@@ -14,21 +14,6 @@ library(plinkbinr)
 
 options(future.globals.maxSize = 8000 * 1024^2)
 
-root <- "/vol/projects/CIIM/meta_cQTL/out"
-cohort <- "2000HIV-EU-discovery"
-cov <- "main"
-pheno1 <- "cytokines"    # exposure
-pheno2 <- "expression"   # outcome
-#file <- paste0(root, "/", cohort, "/mr/", cov, "/clump/", pheno1, "/A1BG_Inflammation_II.tsv")
-#file <- paste0(root, "/", cohort, "/mr/", cov, "/clump/", pheno1, "/Panel3_3116_Naive_B_cells_CD307d_.tsv")
-file <- paste0(root, "/", cohort, "/mr/", cov, "/clump/", pheno1, "/pbmc_7d_il5_spneu.tsv")
-outpath <- paste0(root, "/", cohort, "/mr/", cov, "/", pheno1, "_on_", pheno2)
-
-file = "/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mr/main/clump/cytokines/pbmc_24h_mcp1_hivenv.tsv"
-pheno1 = "cytokines"
-pheno2 = "metabolites"
-outpath = "/vol/projects/CIIM/meta_cQTL/out/2000HIV-EU-discovery/mr/main/cytokines_on_metabolites/data"
-
 args <- commandArgs(trailingOnly = TRUE)
 file <- args[1]
 pheno1 <- args[2]
