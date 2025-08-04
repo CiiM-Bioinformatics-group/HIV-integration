@@ -1,8 +1,8 @@
 # HIV-integration
 
-This repository contains all the R, shell and Snakemake scripts used for the multi-omic analysis of people living with HIV.
+This repository contains all the R, shell and Snakemake scripts used for "Genetic and molecular landscape of comorbidities in people living with HIV".
 
-Publication DOI:
+Publication DOI: DOI: 10.1038/s41591-025-03887-1
 
 Contact: 
 
